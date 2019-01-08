@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Compupler</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container pt-5">
+    <div class="input-field mb-5">
+      <input type="text" class="form-control mb-3" id="user-input">
+      <button type="button" class="btn btn-primary" id="add-item">Добавить</button>
+    </div>
+    <div class="items-list mb-5"></div>
+  </div>
+  <script>
+    var itemsPanel = document.querySelector('.items-list');
+    var userInput = document.querySelector('#user-input');
+    var addItem = document.querySelector('#add-item');
+    var counter = document.createElement('div');
+    counter.classList.add('counter', 'mb-1', 'py-2')
+    itemsPanel.insertAdjacentElement('beforebegin', counter);;
+    var refreshCounter = function() {
+      counter.innerHTML = itemsList.length;
+    }
+    var itemsList = [];
+    var countOfItems = itemsList.length;
+    var onClick = function(evt) {
+      evt.preventDefault();
+      if(userInput.value) {
+        itemsList.push(userInput.value);
+        countOfItems += 1;
+        var item = document.createElement('div');
+        item.classList.add('item', 'bg-light', 'mb-1', 'py-2');
+        item.setAttribute('id', 'item-' + countOfItems);
+        item.innerHTML = userInput.value;
+        itemsPanel.insertAdjacentElement('beforeend', item);
+        refreshCounter();
+        userInput.value = null;
+        userInput.focus();
+      } else {
+        userInput.focus();
+      }
+    }
+    userInput.focus();
+    addItem.addEventListener('click', onClick);
+  </script>
+</body>
+</html>
