@@ -19,14 +19,37 @@
     var itemsPanel = document.querySelector('.items-list');
     var userInput = document.querySelector('#user-input');
     var addItem = document.querySelector('#add-item');
-    var counter = document.createElement('div');
-    counter.classList.add('counter', 'mb-1', 'py-2')
-    itemsPanel.insertAdjacentElement('beforebegin', counter);;
-    var refreshCounter = function() {
-      counter.innerHTML = itemsList.length;
-    }
     var itemsList = [];
     var countOfItems = itemsList.length;
+
+    var itemCounter = document.createElement('div');
+    itemCounter.classList.add('item-counter', 'mb-1', 'py-2');
+    itemsPanel.insertAdjacentElement('beforebegin', itemCounter);
+    var refreshCounter = function() {
+      itemCounter.innerHTML = 'Количество элементов: ' + itemsList.length;
+    }
+
+    var fact = function(x) {
+      z = x;
+      for(i=x-1; i>=2; i--) {
+        z = z * i;
+      }
+      return z;
+    }
+
+    var variantsCounter = document.createElement('div');
+    variantsCounter.classList.add('variants-counter', 'mb-1', 'py-2')
+    itemsPanel.insertAdjacentElement('beforebegin', variantsCounter);
+    var countVariants = function() {
+      if(itemsList.length === 1) {
+        variantsCounter.innerHTML = 'Количество вариантов: ' + 0;
+      } else if(itemsList.length === 2) {
+        variantsCounter.innerHTML = 'Количество вариантов: ' + 1;
+      } else {
+        variantsCounter.innerHTML = 'Количество вариантов: ' + (fact(itemsList.length))/(2*fact(itemsList.length - 2));
+      }
+    }
+
     var onClick = function(evt) {
       evt.preventDefault();
       if(userInput.value) {
@@ -38,12 +61,14 @@
         item.innerHTML = userInput.value;
         itemsPanel.insertAdjacentElement('beforeend', item);
         refreshCounter();
+        countVariants();
         userInput.value = null;
         userInput.focus();
       } else {
         userInput.focus();
       }
     }
+
     userInput.focus();
     addItem.addEventListener('click', onClick);
   </script>
