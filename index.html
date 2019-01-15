@@ -25,6 +25,7 @@
     var userInput = document.querySelector('#user-input');
     var addItem = document.querySelector('#add-item');
     var run = document.querySelector('#run-compare');
+    var compare = document.querySelector('#compare');
     var one = document.querySelector('#one');
     var two = document.querySelector('#two');
     var first = 0;
@@ -93,6 +94,13 @@
       }
     }
 
+    var onClickCompare = function(evt) {
+      if(evt.target.id != 'compare') {
+        itemsList.find(itm => itm.name === evt.target.innerHTML).score += 1;
+        renderPairs();
+      }
+    }
+
     var onClickRun = function(evt) {
       evt.preventDefault;
       renderPairs();
@@ -101,6 +109,7 @@
     userInput.focus();
     addItem.addEventListener('click', onClick);
     run.addEventListener('click', onClickRun);
+    compare.addEventListener('click', onClickCompare);
   </script>
 </body>
 </html>
