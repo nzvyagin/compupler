@@ -51,6 +51,8 @@
         one.innerHTML = itemsList[first].name;
         two.innerHTML = itemsList[second].name;
         second = second+1;
+      } else if(first === itemsList.length - 2 && second === itemsList.length) {
+          console.log(itemsList.sort(compareScores));
       }
     }
 
@@ -60,6 +62,10 @@
         z = z * i;
       }
       return z;
+    }
+
+    var compareScores = function(itemOne, itemTwo) {
+      return  itemTwo.score - itemOne.score;
     }
 
     var variantsCounter = document.createElement('div');
