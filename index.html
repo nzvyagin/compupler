@@ -40,6 +40,9 @@
       itemCounter.innerHTML = 'Количество элементов: ' + itemsList.length;
     }
 
+    var result = document.createElement('ol');
+    result.classList.add('result', 'mb-1', 'py-2');
+
     var renderPairs = function() {
       if(second < itemsList.length) {
         one.innerHTML = itemsList[first].name;
@@ -52,7 +55,12 @@
         two.innerHTML = itemsList[second].name;
         second = second+1;
       } else if(first === itemsList.length - 2 && second === itemsList.length) {
-          console.log(itemsList.sort(compareScores));
+          compare.remove();
+          var resultList = itemsList.sort(compareScores);
+          for(i=0; i<resultList.length; i++) {
+            result.insertAdjacentHTML('beforeend', '<li>' + resultList[i].name + '</li>')
+          }
+          itemsPanel.insertAdjacentElement('beforebegin', result);
       }
     }
 
