@@ -108,6 +108,24 @@
       }
     }
 
+    var onEnter = function(evt) {
+      if(userInput.value && evt.keyCode === 13) {
+        itemsList.push({name: userInput.value, score: 0});
+        countOfItems += 1;
+        var item = document.createElement('div');
+        item.classList.add('item', 'bg-light', 'mb-1', 'py-2');
+        item.setAttribute('id', 'item-' + countOfItems);
+        item.innerHTML = userInput.value;
+        itemsPanel.insertAdjacentElement('beforeend', item);
+        refreshCounter();
+        countVariants();
+        userInput.value = null;
+        userInput.focus();
+      } else {
+        userInput.focus();
+      }
+    }
+
     var onClickCompare = function(evt) {
       if(evt.target.id != 'compare') {
         itemsList.find(itm => itm.name === evt.target.innerHTML).score += 1;
@@ -122,6 +140,7 @@
 
     userInput.focus();
     addItem.addEventListener('click', onClick);
+    document.querySelector('#user-input').addEventListener('keydown', onEnter);
     run.addEventListener('click', onClickRun);
     compare.addEventListener('click', onClickCompare);
   </script>
