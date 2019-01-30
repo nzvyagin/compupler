@@ -18,6 +18,7 @@
       <button type="button" class="btn btn-primary" id="add-item">Добавить</button>
     </div>
     <button class="btn btn-secondary mb-3" id="run-compare">Запустить</button>
+    <button class="btn btn-danger mb-3" id="reset">Сбросить всё</button>
     <div class="items-list mb-5"></div>
   </div>
   <script>
@@ -144,11 +145,17 @@
       renderPairs();
     }
 
+    var onClickReset = function(evt) {
+      evt.preventDefault;
+      document.location.reload(true);
+    }
+
     userInput.focus();
     addItem.addEventListener('click', onClick);
     document.querySelector('#user-input').addEventListener('keydown', onEnter);
     run.addEventListener('click', onClickRun);
     compare.addEventListener('click', onClickCompare);
+    document.querySelector('#reset').addEventListener('click', onClickReset);
   </script>
 </body>
 </html>
