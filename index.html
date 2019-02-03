@@ -102,10 +102,12 @@
         itemsList.push({name: userInput.value, score: 0});
         countOfItems += 1;
         var item = document.createElement('div');
-        item.classList.add('item', 'bg-light', 'mb-1', 'py-2');
-        item.setAttribute('id', 'item-' + countOfItems);
-        item.innerHTML = userInput.value;
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
+        item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
+        item.setAttribute('id', 'item-' + countOfItems);
+        item.querySelector('button').setAttribute('id', 'deleteItem-' + countOfItems);
+        item.querySelector('span').innerHTML = userInput.value;
         refreshCounter();
         countVariants();
         userInput.value = null;
@@ -120,10 +122,12 @@
         itemsList.push({name: userInput.value, score: 0});
         countOfItems += 1;
         var item = document.createElement('div');
-        item.classList.add('item', 'bg-light', 'mb-1', 'py-2');
-        item.setAttribute('id', 'item-' + countOfItems);
-        item.innerHTML = userInput.value;
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
+        item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
+        item.setAttribute('id', 'item-' + countOfItems);
+        item.querySelector('button').setAttribute('id', 'deleteItem-' + countOfItems);
+        item.querySelector('span').innerHTML = userInput.value;
         refreshCounter();
         countVariants();
         userInput.value = null;
@@ -150,12 +154,22 @@
       document.location.reload(true);
     }
 
+    var onClickDelete = function(evt) {
+      evt.preventDefault;
+      var num = evt.target.id;
+      document.querySelector(num.replace('deleteItem-', '#item-')).remove();
+      itemsList.splice(num-1, 1);
+      refreshCounter();
+      countVariants();
+    }
+
     userInput.focus();
     addItem.addEventListener('click', onClick);
     document.querySelector('#user-input').addEventListener('keydown', onEnter);
     run.addEventListener('click', onClickRun);
     compare.addEventListener('click', onClickCompare);
     document.querySelector('#reset').addEventListener('click', onClickReset);
+    itemsPanel.addEventListener('click', onClickDelete);
   </script>
 </body>
 </html>
