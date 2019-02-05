@@ -32,7 +32,6 @@
     var first = 0;
     var second = 1;
     var itemsList = [];
-    var countOfItems = itemsList.length;
 
     var itemCounter = document.createElement('div');
     itemCounter.classList.add('item-counter', 'mb-1', 'py-2');
@@ -100,13 +99,11 @@
       evt.preventDefault();
       if(userInput.value) {
         itemsList.push({name: userInput.value, score: 0});
-        countOfItems += 1;
         var item = document.createElement('div');
         item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
-        item.setAttribute('id', 'item-' + countOfItems);
-        item.querySelector('button').setAttribute('id', 'deleteItem-' + countOfItems);
+        setId();
         item.querySelector('span').innerHTML = userInput.value;
         refreshCounter();
         countVariants();
@@ -120,13 +117,11 @@
     var onEnter = function(evt) {
       if(userInput.value && evt.keyCode === 13) {
         itemsList.push({name: userInput.value, score: 0});
-        countOfItems += 1;
         var item = document.createElement('div');
         item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
-        item.setAttribute('id', 'item-' + countOfItems);
-        item.querySelector('button').setAttribute('id', 'deleteItem-' + countOfItems);
+        setId();
         item.querySelector('span').innerHTML = userInput.value;
         refreshCounter();
         countVariants();
@@ -156,11 +151,21 @@
 
     var onClickDelete = function(evt) {
       evt.preventDefault;
-      var num = evt.target.id;
-      document.querySelector(num.replace('deleteItem-', '#item-')).remove();
-      itemsList.splice(num-1, 1);
+      var num = evt.target.id.replace('deleteItem-', '');
+      document.querySelector('#item-' + num).remove();
+      itemsList.splice(num, 1);
+      setId();
       refreshCounter();
       countVariants();
+      console.log(evt.target.id, num, itemsList);
+    }
+
+    var setId = function() {
+      var items = document.querySelectorAll('.item ');
+      for(i=0; i<items.length; i++) {
+        items[i].setAttribute('id', 'item-' + i);
+        items[i].querySelector('button').setAttribute('id', 'deleteItem-' + i);
+      }
     }
 
     userInput.focus();
