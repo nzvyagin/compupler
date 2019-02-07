@@ -100,7 +100,7 @@
       if(userInput.value) {
         itemsList.push({name: userInput.value, score: 0});
         var item = document.createElement('div');
-        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1">Редактировать</button><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
         setId();
@@ -118,7 +118,7 @@
       if(userInput.value && evt.keyCode === 13) {
         itemsList.push({name: userInput.value, score: 0});
         var item = document.createElement('div');
-        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-danger">Удалить</button>';
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1">Редактировать</button><button class="btn btn-danger">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
         setId();
