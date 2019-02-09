@@ -100,7 +100,7 @@
       if(userInput.value) {
         itemsList.push({name: userInput.value, score: 0});
         var item = document.createElement('div');
-        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1">Редактировать</button><button class="btn btn-danger">Удалить</button>';
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1 editItem">Редактировать</button><button class="btn btn-danger deleteItem">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
         setId();
@@ -118,7 +118,7 @@
       if(userInput.value && evt.keyCode === 13) {
         itemsList.push({name: userInput.value, score: 0});
         var item = document.createElement('div');
-        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1">Редактировать</button><button class="btn btn-danger">Удалить</button>';
+        item.innerHTML = '<span class="flex-grow-1"></span><button class="btn btn-secondary mr-1 editItem">Редактировать</button><button class="btn btn-danger deleteItem">Удалить</button>';
         itemsPanel.insertAdjacentElement('beforeend', item);
         item.classList.add('item', 'bg-light', 'mb-1', 'py-2', 'd-flex');
         setId();
@@ -150,21 +150,33 @@
     }
 
     var onClickDelete = function(evt) {
-      evt.preventDefault;
-      var num = evt.target.id.replace('deleteItem-', '');
-      document.querySelector('#item-' + num).remove();
-      itemsList.splice(num, 1);
-      setId();
-      refreshCounter();
-      countVariants();
-      console.log(evt.target.id, num, itemsList);
+      if(/deleteItem/.test(evt.target.id)) {
+        evt.preventDefault;
+        var num = evt.target.id.replace('deleteItem-', '');
+        document.querySelector('#item-' + num).remove();
+        itemsList.splice(num, 1);
+        setId();
+        refreshCounter();
+        countVariants();
+      }
+    }
+
+    var onClickEdit = function(evt) {
+      if(/editItem/.test(evt.target.id)) {
+        evt.preventDefault;
+        var num = evt.target.id.replace('editItem-', '');
+        document.querySelector('#item-' + num).querySelector('span').setAttribute('contenteditable', true);
+        document.querySelector('#item-' + num).querySelector('span').focus();
+        setId();
+      }
     }
 
     var setId = function() {
       var items = document.querySelectorAll('.item ');
       for(i=0; i<items.length; i++) {
         items[i].setAttribute('id', 'item-' + i);
-        items[i].querySelector('button').setAttribute('id', 'deleteItem-' + i);
+        items[i].querySelector('.deleteItem').setAttribute('id', 'deleteItem-' + i);
+        items[i].querySelector('.editItem').setAttribute('id', 'editItem-' + i);
       }
     }
 
@@ -175,6 +187,7 @@
     compare.addEventListener('click', onClickCompare);
     document.querySelector('#reset').addEventListener('click', onClickReset);
     itemsPanel.addEventListener('click', onClickDelete);
+    itemsPanel.addEventListener('click', onClickEdit);
   </script>
 </body>
 </html>
