@@ -62,6 +62,7 @@
           userInput.remove();
           addItem.remove();
           itemsPanel.remove();
+          document.querySelector('#cancel').remove();
           var resultList = itemsList.sort(compareScores);
           for(i=0; i<resultList.length; i++) {
             result.insertAdjacentHTML('beforeend', '<li>' + resultList[i].name + '</li>')
@@ -142,11 +143,27 @@
     var onClickRun = function(evt) {
       evt.preventDefault;
       renderPairs();
+      var cancel = document.createElement('div');
+      cancel.innerHTML = '<button class="btn btn-danger mb-3" id="cancel">Назад к списку</button>';
+      document.querySelector('.input-field').insertAdjacentElement('afterend', cancel);
+      document.querySelector('#cancel').addEventListener('click', onCancel);
     }
 
     var onClickReset = function(evt) {
       evt.preventDefault;
       document.location.reload(true);
+    }
+
+    var onCancel = function(evt) {
+      evt.preventDefault;
+      first = 0;
+      second = 1;
+      one.innerHTML = '';
+      two.innerHTML = '';
+      for(i=0; i<itemsList.length; i++) {
+        itemsList[i].score = 0;
+      }
+      document.querySelector('#cancel').remove();
     }
 
     var onClickDelete = function(evt) {
