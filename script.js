@@ -171,17 +171,6 @@
 
 var itemsArray = [];
 
-var container = document.querySelector('.container');
-var inputField = document.querySelector('#inputField');
-
-// var makeItemsPanel = function() {
-//   var itemsPanel = document.createElement('div');
-//   itemsPanel.id = 'itemsPanel';
-//   itemsPanel.classList.add('text-right');
-//   itemsPanel.innerHTML = '<button id="resetButton" class="btn btn-outline-danger btn-sm mb-2">Очистить всё (<span id="itemsCount"></span>)</button><div id="itemsList" class="text-left"></div>'
-//   container.appendChild(itemsPanel);
-// }
-
 var addItem = function(content, id) {
   if(document.querySelector('#resetButton').style.display = 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
@@ -197,17 +186,62 @@ var addItem = function(content, id) {
   deleteItem.innerHTML = 'Удалить';
   item.appendChild(deleteItem);
   document.querySelector('#itemsList').appendChild(item);
+  document.querySelector('#itemsCount').innerHTML = '(' + itemsArray.length + ')';
+  refreshRunButton();
+}
+
+var countCombinations = function() {
+  if(itemsArray.length === 1) {
+    return 0;
+  } else if(itemsArray.length === 2) {
+    document.querySelector('#runButton').addEventListener('click', onRunButton);
+    return 1;
+  } else {
+    return (fact(itemsArray.length))/(2*fact(itemsArray.length - 2));
+  }
+}
+
+var onRunButton = function() {
+  document.querySelector('#addItemButton').removeEventListener('click', onAddItemButtonClick);
+  document.querySelector('#inputPanel').remove();
+  document.querySelector('#runButton').removeEventListener('click', onRunButton);
+  document.querySelector('#runPanel').remove();
+  document.querySelector('#itemsPanel').remove();
+}
+
+var fact = function(x) {
+  z = x;
+  for(i=x-1; i>=2; i--) {
+    z = z * i;
+  }
+  return z;
+}
+
+var refreshRunButton = function() {
+  if(document.querySelector('#runPanel') === null) {
+    var runPanel = document.createElement('div');
+    runPanel.id = 'runPanel';
+    runPanel.classList.add('row', 'justify-content-center', 'mb-5');
+    runPanel.innerHTML = '<button id="runButton" class="btn btn-outline-success">Сравнить сочетания (<span id="combinationsCount">10</span>)</button>'
+    document.querySelector('#inputPanel').insertAdjacentElement('afterend', runPanel);
+    document.querySelector('#combinationsCount').innerHTML = countCombinations();
+  } else {
+    document.querySelector('#combinationsCount').innerHTML = countCombinations();
+  }
 }
 
 var onAddItemButtonClick = function(evt) {
   evt.preventDefault();
+  var inputField = document.querySelector('#inputField');
   if(inputField.value) {
     itemsArray.push({name: inputField.value, score: 0});
     addItem(inputField.value, 0);
+    inputField.value = null;
+    inputField.focus();
   } else {
-    userInput.focus();
+    inputField.focus();
   }
 }
 
-inputField.focus();
+document.querySelector('#inputField').focus();
 document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
