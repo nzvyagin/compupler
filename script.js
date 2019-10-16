@@ -125,7 +125,7 @@ var renderResult = function () {
   var resultPanel = document.createElement('ol');
   resultPanel.id = 'resultPanel';
   resultPanel.classList.add('mb-5');
-  for (i = 0; i < result.length; i++) {
+  for (var i = 0; i < result.length; i++) {
     var resultElem = document.createElement('li');
     resultElem.innerHTML = result[i].name;
     resultPanel.appendChild(resultElem);
@@ -134,8 +134,8 @@ var renderResult = function () {
 };
 
 var fact = function (x) {
-  z = x;
-  for (i = x - 1; i >= 2; i--) {
+  var z = x;
+  for (var i = x - 1; i >= 2; i--) {
     z = z * i;
   }
   return z;
@@ -184,7 +184,7 @@ var onClickDelete = function (evt) {
     var itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
     itemsArray.splice(itemToDelete, 1);
     document.querySelector('#itemsList').innerHTML = '';
-    for (i = 0; i < itemsArray.length; i++) {
+    for (var i = 0; i < itemsArray.length; i++) {
       itemsArray[i].score = 0;
       renderItemsArray(itemsArray[i].name, i);
     }
@@ -214,7 +214,7 @@ var onUndoButtonClick = function (evt) {
   firstElementPosition = 0;
   secondElementPosition = 1;
   combinationsCounter = 0;
-  for (i = 0; i < itemsArray.length; i++) {
+  for (var i = 0; i < itemsArray.length; i++) {
     itemsArray[i].score = 0;
     renderItemsArray(itemsArray[i].name, i);
   }
