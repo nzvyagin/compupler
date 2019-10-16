@@ -37,7 +37,7 @@ var renderItemsArray = function (content, id) {
 };
 
 var refreshResetButton = function () {
-  if (document.querySelector('#resetButton').style.display = 'none') {
+  if (document.querySelector('#resetButton').style.display === 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
   }
   document.querySelector('#itemsCount').innerHTML = '(' + itemsArray.length + ')';
