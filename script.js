@@ -4,7 +4,7 @@ var secondElementPosition = 1;
 var combinationsCounter = 0;
 
 var onClickResetButton = function (evt) {
-  evt.preventDefault;
+  evt.preventDefault();
   document.location.reload(true);
 };
 
@@ -180,7 +180,7 @@ var onEnter = function (evt) {
 
 var onClickDelete = function (evt) {
   if (/deleteItem/.test(evt.target.id)) {
-    evt.preventDefault;
+    evt.preventDefault();
     var itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
     itemsArray.splice(itemToDelete, 1);
     document.querySelector('#itemsList').innerHTML = '';
