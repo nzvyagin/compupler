@@ -184,10 +184,10 @@ var onClickDelete = function (evt) {
     var itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
     itemsArray.splice(itemToDelete, 1);
     document.querySelector('#itemsList').innerHTML = '';
-    for (var i = 0; i < itemsArray.length; i++) {
-      itemsArray[i].score = 0;
-      renderItemsArray(itemsArray[i].name, i);
-    }
+    itemsArray.forEach((elem, idx) => {
+      elem.score = 0;
+      renderItemsArray(elem.name, idx);
+    });
     refreshRunButton();
     refreshResetButton();
     document.querySelector('#inputField').focus();
@@ -214,10 +214,10 @@ var onUndoButtonClick = function (evt) {
   firstElementPosition = 0;
   secondElementPosition = 1;
   combinationsCounter = 0;
-  for (var i = 0; i < itemsArray.length; i++) {
-    itemsArray[i].score = 0;
-    renderItemsArray(itemsArray[i].name, i);
-  }
+  itemsArray.forEach((elem, idx) => {
+    elem.score = 0;
+    renderItemsArray(elem.name, idx);
+  });
   refreshResetButton();
   refreshRunButton();
 };
