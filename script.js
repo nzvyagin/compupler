@@ -121,7 +121,7 @@ var compareScores = function (itemOne, itemTwo) {
 };
 
 var renderResult = function () {
-  var result = itemsArray.sort(compareScores);
+  var result = itemsArray.slice('').sort(compareScores);
   var resultPanel = document.createElement('ol');
   resultPanel.id = 'resultPanel';
   resultPanel.classList.add('mb-5');
