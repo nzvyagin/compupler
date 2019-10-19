@@ -238,7 +238,14 @@ var renderInputPanel = function () {
   document.querySelector('.container').insertAdjacentElement('beforeend', inputPanel);
   document.querySelector('#inputField').focus();
   document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
+  document.querySelector('#inputField').addEventListener('paste', (evt) => pasteFromBuffer(evt));
   document.querySelector('#inputField').addEventListener('keydown', onEnter);
+};
+
+const pasteFromBuffer = (evt) => {
+  evt.preventDefault();
+  const newText = evt.clipboardData.getData('text').replace(/\n/g, ' && ');
+  document.execCommand('insertHTML', false, newText);
 };
 
 var renderItemsPanel = function () {
