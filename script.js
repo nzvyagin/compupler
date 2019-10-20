@@ -154,8 +154,11 @@ var onAddItemButtonClick = function (evt) {
   evt.preventDefault();
   var inputField = document.querySelector('#inputField');
   if (inputField.value) {
-    itemsArray.push({ name: inputField.value, score: 0 });
-    addItem(inputField.value, 0);
+    const inputData = String(inputField.value).split(' && ');
+    inputData.forEach((elem) => {
+      itemsArray.push({ name: elem, score: 0 });
+      addItem(elem, itemsArray.findIndex(itm => itm.name === elem));
+    });
     inputField.value = null;
     inputField.focus();
   } else {
@@ -168,8 +171,11 @@ var onEnter = function (evt) {
     evt.preventDefault();
     var inputField = document.querySelector('#inputField');
     if (inputField.value) {
-      itemsArray.push({ name: inputField.value, score: 0 });
-      addItem(inputField.value, 0);
+      const inputData = String(inputField.value).split(' && ');
+      inputData.forEach((elem) => {
+        itemsArray.push({ name: elem, score: 0 });
+        addItem(elem, itemsArray.findIndex(itm => itm.name === elem));
+      });
       inputField.value = null;
       inputField.focus();
     } else {
