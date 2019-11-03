@@ -49,7 +49,7 @@ var countCombinations = function () {
   } else if (itemsArray.length === 2) {
     return 1;
   } else {
-    return (fact(itemsArray.length)) / (2 * fact(itemsArray.length - 2));
+    return Math.round((fact(itemsArray.length)) / (2 * fact(itemsArray.length - 2)));
   }
 };
 
