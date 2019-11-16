@@ -248,6 +248,14 @@ var renderInputPanel = function () {
   document.querySelector('#inputField').addEventListener('keydown', onEnter);
 };
 
+var renderOnboardingPanel = function () {
+  var onboardingPanel = document.createElement('div');
+  onboardingPanel.id = 'onboardingPanel';
+  onboardingPanel.classList.add('mb-5');
+  onboardingPanel.innerHTML = '<div id="onboardingPanel" class="text-center"><div class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</div><div class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</div></div>';
+  document.querySelector('h1').insertAdjacentElement('afterend', onboardingPanel);
+};
+
 const pasteFromBuffer = (evt) => {
   evt.preventDefault();
   const newText = evt.clipboardData.getData('text').replace(/\n/g, ' && ');
@@ -274,6 +282,7 @@ var renderRunPanel = function () {
   refreshRunButton();
 };
 
+renderOnboardingPanel();
 renderInputPanel();
 renderRunPanel();
 renderItemsPanel();
