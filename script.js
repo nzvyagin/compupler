@@ -55,6 +55,7 @@ var countCombinations = function () {
 
 var onRunButton = function () {
   document.querySelector('#addItemButton').removeEventListener('click', onAddItemButtonClick);
+  document.querySelector('#onboardingPanel').remove();
   document.querySelector('#inputPanel').remove();
   document.querySelector('#runButton').removeEventListener('click', onRunButton);
   document.querySelector('#runPanel').remove();
@@ -214,6 +215,7 @@ var onUndoButtonClick = function (evt) {
   } else if (document.querySelector('#resultPanel')) {
     document.querySelector('#resultPanel').remove();
   }
+  renderOnboardingPanel();
   renderInputPanel();
   renderRunPanel();
   renderItemsPanel();
