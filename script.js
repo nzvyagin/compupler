@@ -244,17 +244,22 @@ var renderInputPanel = function () {
   inputPanel.classList.add('mb-5');
   inputPanel.innerHTML = '<div id="inputRow" class="d-flex flex-row"><input type="text" id="inputField" class="form-control mr-1"><button id="addItemButton" class="btn btn-outline-primary">Добавить</button></div>';
   document.querySelector('.container').insertAdjacentElement('beforeend', inputPanel);
-  document.querySelector('#inputField').focus();
   document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
   document.querySelector('#inputField').addEventListener('paste', (evt) => pasteFromBuffer(evt));
   document.querySelector('#inputField').addEventListener('keydown', onEnter);
+  document.querySelector('#inputField').addEventListener('focus', onInputPanelFocus);
+};
+
+var onInputPanelFocus = function () {
+  document.querySelector('#firstHint').classList.add('fade');
+  document.querySelector('#secondHint').classList.add('fade');
 };
 
 var renderOnboardingPanel = function () {
   var onboardingPanel = document.createElement('div');
   onboardingPanel.id = 'onboardingPanel';
-  onboardingPanel.classList.add('mb-5');
-  onboardingPanel.innerHTML = '<div id="onboardingPanel" class="text-center"><div class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</div><div class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</div></div>';
+  onboardingPanel.classList.add('position-relative', 'text-center', 'mb-5');
+  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-top"><p class="mb-2">Можно добавлять несколько значений одним нажатием. Просто вводите их через &&.</p><p class="mb-2">Или скопируйте готовый текстовый список в поле ввода</p></div>';
   document.querySelector('h1').insertAdjacentElement('afterend', onboardingPanel);
 };
 
