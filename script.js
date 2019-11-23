@@ -155,8 +155,9 @@ var onAddItemButtonClick = function (evt) {
   evt.preventDefault();
   var inputField = document.querySelector('#inputField');
   if (inputField.value) {
-    const inputData = String(inputField.value).split(' && ');
-    inputData.forEach((elem) => {
+    const inputData = String(inputField.value).split(',');
+    const trimmedInputData = Array.from(inputData, elem => elem.trim());
+    trimmedInputData.forEach((elem) => {
       itemsArray.push({ name: elem, score: 0 });
       addItem(elem, itemsArray.findIndex(itm => itm.name === elem));
     });
@@ -172,8 +173,9 @@ var onEnter = function (evt) {
     evt.preventDefault();
     var inputField = document.querySelector('#inputField');
     if (inputField.value) {
-      const inputData = String(inputField.value).split(' && ');
-      inputData.forEach((elem) => {
+      const inputData = String(inputField.value).split(',');
+      const trimmedInputData = Array.from(inputData, elem => elem.trim());
+      trimmedInputData.forEach((elem) => {
         itemsArray.push({ name: elem, score: 0 });
         addItem(elem, itemsArray.findIndex(itm => itm.name === elem));
       });
@@ -259,13 +261,13 @@ var renderOnboardingPanel = function () {
   var onboardingPanel = document.createElement('div');
   onboardingPanel.id = 'onboardingPanel';
   onboardingPanel.classList.add('position-relative', 'text-center', 'mb-5');
-  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-top"><p class="mb-2">Можно добавлять несколько значений одним нажатием. Просто вводите их через &&.</p><p class="mb-2">Или скопируйте готовый текстовый список в поле ввода</p></div>';
+  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-top"><p class="mb-2">Можно добавлять несколько значений одним нажатием. Просто вводите их через запятую.</p><p class="mb-2">Или скопируйте готовый текстовый список в поле ввода</p></div>';
   document.querySelector('h1').insertAdjacentElement('afterend', onboardingPanel);
 };
 
 const pasteFromBuffer = (evt) => {
   evt.preventDefault();
-  const newText = evt.clipboardData.getData('text').replace(/\n/g, ' && ');
+  const newText = evt.clipboardData.getData('text').replace(/\n/g, ', ');
   document.execCommand('insertHTML', false, newText);
 };
 
