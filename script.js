@@ -143,12 +143,18 @@ var fact = function (x) {
 };
 
 var refreshRunButton = function () {
-  if (countCombinations() === 0) {
-    document.querySelector('#runButton').style.display = 'none';
-  } else if (countCombinations() > 0) {
-    document.querySelector('#runButton').style.display = 'block';
-    document.querySelector('#combinationsCount').innerHTML = countCombinations();
+  var runPanel = document.querySelector('#runButton');
+  if (itemsArray.length === 0) {
+    runPanel.style.display = 'none';
+  } else {
+    runPanel.style.display = 'block';
   }
+  if (countCombinations() === 0) {
+    runPanel.disabled = true;
+  } else if (countCombinations() > 0) {
+    runPanel.disabled = false;
+  }
+  document.querySelector('#combinationsCount').innerHTML = countCombinations();
 };
 
 var onAddItemButtonClick = function (evt) {
