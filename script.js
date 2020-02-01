@@ -260,8 +260,8 @@ var onInputPanelFocus = function () {
 var renderOnboardingPanel = function () {
   var onboardingPanel = document.createElement('div');
   onboardingPanel.id = 'onboardingPanel';
-  onboardingPanel.classList.add('position-relative', 'text-center', 'mb-5');
-  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-top"><p class="mb-2">Можно добавлять несколько значений одним нажатием. Просто вводите их через запятую.</p><p class="mb-2">Или скопируйте готовый текстовый список в поле ввода</p></div>';
+  onboardingPanel.classList.add('position-relative', 'text-center', 'mb-3');
+  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-bottom"><p class="mb-1"><small>Можно добавлять несколько значений одним нажатием. Просто вводите их через запятую. Или скопируйте готовый текстовый список в поле ввода</small></p></div>';
   document.querySelector('h1').insertAdjacentElement('afterend', onboardingPanel);
 };
 
