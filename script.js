@@ -235,7 +235,6 @@ var onUndoButtonClick = function (evt) {
     renderItemsArray(elem.name, idx);
   });
   refreshResetButton();
-  refreshRunButton();
 };
 
 var onComparePanelClick = function (evt) {
