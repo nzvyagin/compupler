@@ -71,7 +71,7 @@ var renderProgressPanel = function () {
   progressPanel.id = 'progressPanel';
   progressPanel.classList.add('text-center', 'mb-3');
   progressPanel.innerHTML = '<span id="currentСombination"></span><span>/</span><span id="allСombinations">' + countCombinations() + '</span>';
-  document.querySelector('.container').appendChild(progressPanel);
+  document.querySelector('main').appendChild(progressPanel);
 };
 
 var renderComparePanel = function () {
@@ -79,7 +79,7 @@ var renderComparePanel = function () {
   comparePanel.id = 'comparePanel';
   comparePanel.classList.add('mb-5');
   comparePanel.innerHTML = '<div id="firstElement" class="py-3 border bg-light text-center"></div><div class="py-1 text-center">или</div><div id="secondElement" class="py-3 border bg-light text-center"></div></div>';
-  document.querySelector('.container').appendChild(comparePanel);
+  document.querySelector('main').appendChild(comparePanel);
   document.querySelector('#comparePanel').addEventListener('click', onComparePanelClick);
 };
 
@@ -88,7 +88,7 @@ var renderUndoPanel = function () {
   undoPanel.id = 'undoPanel';
   undoPanel.classList.add('row', 'justify-content-center', 'mb-3');
   undoPanel.innerHTML = '<button id="undoButton" class="btn btn-outline-danger">Начать заново</button>';
-  document.querySelector('.container').appendChild(undoPanel);
+  document.querySelector('main').appendChild(undoPanel);
   document.querySelector('#undoButton').addEventListener('click', onUndoButtonClick);
 };
 
@@ -250,7 +250,7 @@ var renderInputPanel = function () {
   inputPanel.id = 'inputPanel';
   inputPanel.classList.add('mb-5');
   inputPanel.innerHTML = '<div id="inputRow" class="d-flex flex-row"><input type="text" id="inputField" class="form-control mr-1"><button id="addItemButton" class="btn btn-outline-primary">Добавить</button></div>';
-  document.querySelector('.container').insertAdjacentElement('beforeend', inputPanel);
+  document.querySelector('main').insertAdjacentElement('beforeend', inputPanel);
   document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
   document.querySelector('#inputField').addEventListener('paste', (evt) => pasteFromBuffer(evt));
   document.querySelector('#inputField').addEventListener('keydown', onEnter);
@@ -281,7 +281,7 @@ var renderItemsPanel = function () {
   itemsPanel.id = 'itemsPanel';
   itemsPanel.classList.add('text-right');
   itemsPanel.innerHTML = '<button id="resetButton" style="display: none;" class="btn btn-outline-danger btn-sm mb-2">Очистить всё <span id="itemsCount"></span></button><div id="itemsList" class="text-left"></div>';
-  document.querySelector('.container').insertAdjacentElement('beforeend', itemsPanel);
+  document.querySelector('main').insertAdjacentElement('beforeend', itemsPanel);
   document.querySelector('#resetButton').addEventListener('click', onClickResetButton);
   document.querySelector('#itemsList').addEventListener('click', onClickDelete);
 };
