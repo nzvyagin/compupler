@@ -205,7 +205,6 @@ var onClickDelete = function (evt) {
     });
     refreshRunButton();
     refreshResetButton();
-    document.querySelector('#inputField').focus();
     if (itemsArray.length === 0) {
       document.location.reload(true);
     }
