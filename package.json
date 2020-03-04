@@ -1,5 +1,5 @@
 {
-  "private": "true",
+  "private": true,
   "devDependencies": {
     "eslint": "^6.0.0",
     "semistandard": "^13.0.1"
