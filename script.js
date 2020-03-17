@@ -3,12 +3,12 @@ var firstElementPosition = 0;
 var secondElementPosition = 1;
 var combinationsCounter = 0;
 
-var onClickResetButton = function (evt) {
+var onClickResetButton = (evt) => {
   evt.preventDefault();
   document.location.reload(true);
 };
 
-var addItem = function (content, id) {
+var addItem = (content, id) => {
   var item = document.createElement('div');
   item.id = 'item-' + id;
   item.classList.add('mb-2', 'd-flex', 'align-items-center', 'bg-light');
@@ -23,7 +23,7 @@ var addItem = function (content, id) {
   refreshRunButton();
 };
 
-var renderItemsArray = function (content, id) {
+var renderItemsArray = (content, id) => {
   var item = document.createElement('div');
   item.id = 'item-' + id;
   item.classList.add('mb-2', 'd-flex', 'align-items-center', 'bg-light');
@@ -36,14 +36,14 @@ var renderItemsArray = function (content, id) {
   document.querySelector('#itemsList').insertAdjacentElement('afterbegin', item);
 };
 
-var refreshResetButton = function () {
+var refreshResetButton = () => {
   if (document.querySelector('#resetButton').style.display === 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
   }
   document.querySelector('#itemsCount').innerHTML = '(' + itemsArray.length + ')';
 };
 
-var countCombinations = function () {
+var countCombinations = () => {
   if (itemsArray.length === 1) {
     return 0;
   } else if (itemsArray.length === 2) {
@@ -53,7 +53,7 @@ var countCombinations = function () {
   }
 };
 
-var onRunButton = function () {
+var onRunButton = () => {
   document.querySelector('#addItemButton').removeEventListener('click', onAddItemButtonClick);
   document.querySelector('#onboardingPanel').remove();
   document.querySelector('#inputPanel').remove();
@@ -66,7 +66,7 @@ var onRunButton = function () {
   renderUndoPanel();
 };
 
-var renderProgressPanel = function () {
+var renderProgressPanel = () => {
   var progressPanel = document.createElement('div');
   progressPanel.id = 'progressPanel';
   progressPanel.classList.add('text-center', 'mb-3');
@@ -74,7 +74,7 @@ var renderProgressPanel = function () {
   document.querySelector('main').appendChild(progressPanel);
 };
 
-var renderComparePanel = function () {
+var renderComparePanel = () => {
   var comparePanel = document.createElement('div');
   comparePanel.id = 'comparePanel';
   comparePanel.classList.add('mb-5');
@@ -83,7 +83,7 @@ var renderComparePanel = function () {
   document.querySelector('#comparePanel').addEventListener('click', onComparePanelClick);
 };
 
-var renderUndoPanel = function () {
+var renderUndoPanel = () => {
   var undoPanel = document.createElement('div');
   undoPanel.id = 'undoPanel';
   undoPanel.classList.add('row', 'justify-content-center', 'mb-3');
@@ -92,7 +92,7 @@ var renderUndoPanel = function () {
   document.querySelector('#undoButton').addEventListener('click', onUndoButtonClick);
 };
 
-var renderPairs = function () {
+var renderPairs = () => {
   var firstElement = document.querySelector('#firstElement');
   var secondElement = document.querySelector('#secondElement');
   if (secondElementPosition < itemsArray.length) {
@@ -117,11 +117,11 @@ var renderPairs = function () {
   }
 };
 
-var compareScores = function (itemOne, itemTwo) {
+var compareScores = (itemOne, itemTwo) => {
   return itemTwo.score - itemOne.score;
 };
 
-var renderResult = function () {
+var renderResult = () => {
   var result = itemsArray.slice('').sort(compareScores);
   var resultPanel = document.createElement('ol');
   resultPanel.id = 'resultPanel';
@@ -134,7 +134,7 @@ var renderResult = function () {
   document.querySelector('#undoPanel').insertAdjacentElement('beforebegin', resultPanel);
 };
 
-var fact = function (x) {
+var fact = (x) => {
   var z = x;
   for (var i = x - 1; i >= 2; i--) {
     z = z * i;
@@ -142,7 +142,7 @@ var fact = function (x) {
   return z;
 };
 
-var refreshRunButton = function () {
+var refreshRunButton = () => {
   var runPanel = document.querySelector('#runButton');
   if (itemsArray.length === 0) {
     runPanel.style.display = 'none';
@@ -157,7 +157,7 @@ var refreshRunButton = function () {
   document.querySelector('#combinationsCount').innerHTML = countCombinations();
 };
 
-var onAddItemButtonClick = function (evt) {
+var onAddItemButtonClick = (evt) => {
   evt.preventDefault();
   var inputField = document.querySelector('#inputField');
   if (inputField.value) {
@@ -174,7 +174,7 @@ var onAddItemButtonClick = function (evt) {
   }
 };
 
-var onEnter = function (evt) {
+var onEnter = (evt) => {
   if (evt.keyCode === 13) {
     evt.preventDefault();
     var inputField = document.querySelector('#inputField');
@@ -193,7 +193,7 @@ var onEnter = function (evt) {
   }
 };
 
-var onClickDelete = function (evt) {
+var onClickDelete = (evt) => {
   if (/deleteItem/.test(evt.target.id)) {
     evt.preventDefault();
     var itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
@@ -211,7 +211,7 @@ var onClickDelete = function (evt) {
   }
 };
 
-var onUndoButtonClick = function (evt) {
+var onUndoButtonClick = (evt) => {
   document.querySelector('#undoButton').removeEventListener('click', onUndoButtonClick);
   document.querySelector('#undoButton').remove();
   evt.preventDefault();
@@ -236,7 +236,7 @@ var onUndoButtonClick = function (evt) {
   refreshResetButton();
 };
 
-var onComparePanelClick = function (evt) {
+var onComparePanelClick = (evt) => {
   evt.preventDefault();
   if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
     itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
@@ -244,7 +244,7 @@ var onComparePanelClick = function (evt) {
   }
 };
 
-var renderInputPanel = function () {
+var renderInputPanel = () => {
   var inputPanel = document.createElement('div');
   inputPanel.id = 'inputPanel';
   inputPanel.classList.add('mb-5');
@@ -256,12 +256,12 @@ var renderInputPanel = function () {
   document.querySelector('#inputField').addEventListener('focus', onInputPanelFocus);
 };
 
-var onInputPanelFocus = function () {
+var onInputPanelFocus = () => {
   document.querySelector('#firstHint').classList.add('fade');
   document.querySelector('#secondHint').classList.add('fade');
 };
 
-var renderOnboardingPanel = function () {
+var renderOnboardingPanel = () => {
   var onboardingPanel = document.createElement('div');
   onboardingPanel.id = 'onboardingPanel';
   onboardingPanel.classList.add('position-relative', 'text-center', 'mb-3');
@@ -275,7 +275,7 @@ const pasteFromBuffer = (evt) => {
   document.execCommand('insertHTML', false, newText);
 };
 
-var renderItemsPanel = function () {
+var renderItemsPanel = () => {
   var itemsPanel = document.createElement('div');
   itemsPanel.id = 'itemsPanel';
   itemsPanel.classList.add('text-right');
@@ -285,7 +285,7 @@ var renderItemsPanel = function () {
   document.querySelector('#itemsList').addEventListener('click', onClickDelete);
 };
 
-var renderRunPanel = function () {
+var renderRunPanel = () => {
   var runPanel = document.createElement('div');
   runPanel.id = 'runPanel';
   runPanel.classList.add('row', 'justify-content-center', 'mb-5');
