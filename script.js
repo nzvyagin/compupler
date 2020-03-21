@@ -8,32 +8,26 @@ var onClickResetButton = (evt) => {
   document.location.reload(true);
 };
 
-var addItem = (content, id) => {
-  var item = document.createElement('div');
-  item.id = 'item-' + id;
-  item.classList.add('mb-2', 'd-flex', 'align-items-center', 'bg-light');
-  item.innerHTML = '<div class="flex-grow-1 mx-1">' + content + '</div>';
-  var deleteItem = document.createElement('button');
-  deleteItem.id = 'deleteItem-' + id;
-  deleteItem.classList.add('btn', 'btn-danger', 'btn-sm');
-  deleteItem.innerHTML = 'Удалить';
-  item.insertAdjacentElement('beforeend', deleteItem);
-  document.querySelector('#itemsList').insertAdjacentElement('afterbegin', item);
+const addItem = (content, id) => {
+  const itemTemplate = `
+    <div id="item-${id}" class="mb-2 d-flex align-items-center bg-light">
+      <div class="flex-grow-1 mx-1">${content}</div>
+      <button id="deleteItem-${id}" class="btn btn-danger btn-sm">Удалить</button>
+    </div>
+  `;
+  document.querySelector('#itemsList').insertAdjacentHTML('afterbegin', itemTemplate);
   refreshResetButton();
   refreshRunButton();
 };
 
 var renderItemsArray = (content, id) => {
-  var item = document.createElement('div');
-  item.id = 'item-' + id;
-  item.classList.add('mb-2', 'd-flex', 'align-items-center', 'bg-light');
-  item.innerHTML = '<div class="flex-grow-1 mx-1">' + content + '</div>';
-  var deleteItem = document.createElement('button');
-  deleteItem.id = 'deleteItem-' + id;
-  deleteItem.classList.add('btn', 'btn-danger', 'btn-sm');
-  deleteItem.innerHTML = 'Удалить';
-  item.insertAdjacentElement('beforeend', deleteItem);
-  document.querySelector('#itemsList').insertAdjacentElement('afterbegin', item);
+  const itemTemplate = `
+    <div id="item-${id}" class="mb-2 d-flex align-items-center bg-light">
+      <div class="flex-grow-1 mx-1">${content}</div>
+      <button id="deleteItem-${id}" class="btn btn-danger btn-sm">Удалить</button>
+    </div>
+  `;
+  document.querySelector('#itemsList').insertAdjacentHTML('afterbegin', itemTemplate);
 };
 
 var refreshResetButton = () => {
@@ -67,28 +61,35 @@ var onRunButton = () => {
 };
 
 var renderProgressPanel = () => {
-  var progressPanel = document.createElement('div');
-  progressPanel.id = 'progressPanel';
-  progressPanel.classList.add('text-center', 'mb-3');
-  progressPanel.innerHTML = '<span id="currentСombination"></span><span>/</span><span id="allСombinations">' + countCombinations() + '</span>';
-  document.querySelector('main').appendChild(progressPanel);
+  const progressPanelTemplate = `
+    <div id="progressPanel" class="text-center mb-3">
+      <span id="currentСombination"></span>
+      <span>/</span>
+      <span id="allСombinations">${countCombinations()}</span>
+    </div>
+  `;
+  document.querySelector('main').insertAdjacentHTML('beforeend', progressPanelTemplate);
 };
 
-var renderComparePanel = () => {
-  var comparePanel = document.createElement('div');
-  comparePanel.id = 'comparePanel';
-  comparePanel.classList.add('mb-5');
-  comparePanel.innerHTML = '<div id="firstElement" class="py-3 border bg-light text-center"></div><div class="py-1 text-center">или</div><div id="secondElement" class="py-3 border bg-light text-center"></div></div>';
-  document.querySelector('main').appendChild(comparePanel);
+const renderComparePanel = () => {
+  const comparePanelTemplate = `
+    <div id="comparePanel" class="mb-5">
+      <div id="firstElement" class="py-3 border bg-light text-center"></div>
+      <div class="py-1 text-center">или</div>
+      <div id="secondElement" class="py-3 border bg-light text-center"></div>
+    </div>
+  `;
+  document.querySelector('main').insertAdjacentHTML('beforeend', comparePanelTemplate);
   document.querySelector('#comparePanel').addEventListener('click', onComparePanelClick);
 };
 
-var renderUndoPanel = () => {
-  var undoPanel = document.createElement('div');
-  undoPanel.id = 'undoPanel';
-  undoPanel.classList.add('row', 'justify-content-center', 'mb-3');
-  undoPanel.innerHTML = '<button id="undoButton" class="btn btn-outline-danger">Начать заново</button>';
-  document.querySelector('main').appendChild(undoPanel);
+const renderUndoPanel = () => {
+  const undoPanelTemplate = `
+    <div id="undoPanel" class="row justify-content-center mb-3">
+      <button id="undoButton" class="btn btn-outline-danger">Начать заново</button>
+    </div>
+  `;
+  document.querySelector('main').insertAdjacentHTML('beforeend', undoPanelTemplate);
   document.querySelector('#undoButton').addEventListener('click', onUndoButtonClick);
 };
 
@@ -121,17 +122,14 @@ var compareScores = (itemOne, itemTwo) => {
   return itemTwo.score - itemOne.score;
 };
 
-var renderResult = () => {
-  var result = itemsArray.slice('').sort(compareScores);
-  var resultPanel = document.createElement('ol');
-  resultPanel.id = 'resultPanel';
-  resultPanel.classList.add('mb-5');
-  for (var i = 0; i < result.length; i++) {
-    var resultElem = document.createElement('li');
-    resultElem.innerHTML = result[i].name;
-    resultPanel.appendChild(resultElem);
-  }
-  document.querySelector('#undoPanel').insertAdjacentElement('beforebegin', resultPanel);
+const renderResult = () => {
+  const result = itemsArray.slice('').sort(compareScores);
+  const renderResultTemplate = `
+  <ol id="resultPanel" class="mb-5">${result.reduce((acc, item) => {
+    acc += `<li>${item.name}</li>`;
+    return acc;
+  }, ``)}</ol>`;
+  document.querySelector('#undoPanel').insertAdjacentHTML('beforebegin', renderResultTemplate);
 };
 
 var fact = (x) => {
@@ -244,12 +242,16 @@ var onComparePanelClick = (evt) => {
   }
 };
 
-var renderInputPanel = () => {
-  var inputPanel = document.createElement('div');
-  inputPanel.id = 'inputPanel';
-  inputPanel.classList.add('mb-5');
-  inputPanel.innerHTML = '<div id="inputRow" class="d-flex flex-row"><input type="text" id="inputField" class="form-control mr-1"><button id="addItemButton" class="btn btn-outline-primary">Добавить</button></div>';
-  document.querySelector('main').insertAdjacentElement('beforeend', inputPanel);
+const renderInputPanel = () => {
+  const inputPanel = `
+  <div id="inputPanel" class="mb-5">
+    <div id="inputRow" class="d-flex flex-row">
+      <input type="text" id="inputField" class="form-control mr-1">
+      <button id="addItemButton" class="btn btn-outline-primary">Добавить</button>
+    </div>
+  </div>
+  `;
+  document.querySelector('main').insertAdjacentHTML('beforeend', inputPanel);
   document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
   document.querySelector('#inputField').addEventListener('paste', (evt) => pasteFromBuffer(evt));
   document.querySelector('#inputField').addEventListener('keydown', onEnter);
@@ -261,12 +263,21 @@ var onInputPanelFocus = () => {
   document.querySelector('#secondHint').classList.add('fade');
 };
 
-var renderOnboardingPanel = () => {
-  var onboardingPanel = document.createElement('div');
-  onboardingPanel.id = 'onboardingPanel';
-  onboardingPanel.classList.add('position-relative', 'text-center', 'mb-3');
-  onboardingPanel.innerHTML = '<div id="firstHint"><p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p><p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p></div><div id="secondHint" class="position-absolute fixed-bottom"><p class="mb-1"><small>Можно добавлять несколько значений одним нажатием. Просто вводите их через запятую. Или скопируйте готовый текстовый список в поле ввода</small></p></div>';
-  document.querySelector('h1').insertAdjacentElement('afterend', onboardingPanel);
+const renderOnboardingPanel = () => {
+  const onboardingPanel = `
+    <div id="onboardingPanel" class="position-relative text-center mb-3">
+      <div id="firstHint">
+        <p class="mb-2">Составьте личный рейтинг для чего угодно: фильмов, задач, понравившихся девушек</p>
+        <p class="mb-2">Добавьте их в список, и Compupler поможет сравнить всех друг с другом</p>
+      </div>
+      <div id="secondHint" class="position-absolute fixed-bottom">
+        <p class="mb-1">
+          <small>Можно добавлять несколько значений одним нажатием. Просто вводите их через запятую. Или скопируйте готовый текстовый список в поле ввода</small>
+        </p>
+      </div>
+    </div>
+  `;
+  document.querySelector('h1').insertAdjacentHTML('afterend', onboardingPanel);
 };
 
 const pasteFromBuffer = (evt) => {
@@ -275,22 +286,25 @@ const pasteFromBuffer = (evt) => {
   document.execCommand('insertHTML', false, newText);
 };
 
-var renderItemsPanel = () => {
-  var itemsPanel = document.createElement('div');
-  itemsPanel.id = 'itemsPanel';
-  itemsPanel.classList.add('text-right');
-  itemsPanel.innerHTML = '<button id="resetButton" style="display: none;" class="btn btn-outline-danger btn-sm mb-2">Очистить всё <span id="itemsCount"></span></button><div id="itemsList" class="text-left"></div>';
-  document.querySelector('main').insertAdjacentElement('beforeend', itemsPanel);
+const renderItemsPanel = () => {
+  const itemsPanel = `
+    <div id="itemsPanel" class="text-right">
+      <button id="resetButton" style="display: none;" class="btn btn-outline-danger btn-sm mb-2">Очистить всё <span id="itemsCount"></span></button>
+      <div id="itemsList" class="text-left"></div>
+    </div>
+  `;
+  document.querySelector('main').insertAdjacentHTML('beforeend', itemsPanel);
   document.querySelector('#resetButton').addEventListener('click', onClickResetButton);
   document.querySelector('#itemsList').addEventListener('click', onClickDelete);
 };
 
 var renderRunPanel = () => {
-  var runPanel = document.createElement('div');
-  runPanel.id = 'runPanel';
-  runPanel.classList.add('row', 'justify-content-center', 'mb-5');
-  runPanel.innerHTML = '<button id="runButton" class="btn btn-outline-success">Сравнить сочетания (<span id="combinationsCount"></span>)</button>';
-  document.querySelector('#inputPanel').insertAdjacentElement('afterend', runPanel);
+  const runPanel = `
+    <div id="runPanel" class="row justify-content-center mb-5">
+      <button id="runButton" class="btn btn-outline-success">Сравнить сочетания (<span id="combinationsCount"></span>)</button>
+    </div>
+  `;
+  document.querySelector('#inputPanel').insertAdjacentHTML('afterend', runPanel);
   document.querySelector('#runButton').addEventListener('click', onRunButton);
   refreshRunButton();
 };
