@@ -20,16 +20,6 @@ const addItem = (content, id) => {
   refreshRunButton();
 };
 
-var renderItemsArray = (content, id) => {
-  const itemTemplate = `
-    <div id="item-${id}" class="mb-2 d-flex align-items-center bg-light">
-      <div class="flex-grow-1 mx-1">${content}</div>
-      <button id="deleteItem-${id}" class="btn btn-danger btn-sm">Удалить</button>
-    </div>
-  `;
-  document.querySelector('#itemsList').insertAdjacentHTML('afterbegin', itemTemplate);
-};
-
 var refreshResetButton = () => {
   if (document.querySelector('#resetButton').style.display === 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
@@ -199,7 +189,7 @@ var onClickDelete = (evt) => {
     document.querySelector('#itemsList').innerHTML = '';
     itemsArray.forEach((elem, idx) => {
       elem.score = 0;
-      renderItemsArray(elem.name, idx);
+      addItem(elem.name, idx);
     });
     refreshRunButton();
     refreshResetButton();
@@ -229,7 +219,7 @@ var onUndoButtonClick = (evt) => {
   combinationsCounter = 0;
   itemsArray.forEach((elem, idx) => {
     elem.score = 0;
-    renderItemsArray(elem.name, idx);
+    addItem(elem.name, idx);
   });
   refreshResetButton();
 };
