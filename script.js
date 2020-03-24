@@ -64,13 +64,14 @@ var renderProgressPanel = () => {
 const renderComparePanel = () => {
   const comparePanelTemplate = `
     <div id="comparePanel" class="mb-5">
-      <div id="firstElement" class="py-3 border bg-light text-center"></div>
+      <div id="firstElement" class="py-3 border bg-light text-center" tabindex=0></div>
       <div class="py-1 text-center">или</div>
-      <div id="secondElement" class="py-3 border bg-light text-center"></div>
+      <div id="secondElement" class="py-3 border bg-light text-center" tabindex=0></div>
     </div>
   `;
   document.querySelector('main').insertAdjacentHTML('beforeend', comparePanelTemplate);
   document.querySelector('#comparePanel').addEventListener('click', onComparePanelClick);
+  document.querySelector('#comparePanel').addEventListener('keydown', onComparePanelEnter);
 };
 
 const renderUndoPanel = () => {
@@ -103,6 +104,7 @@ var renderPairs = () => {
   } else if (firstElementPosition === itemsArray.length - 2 && secondElementPosition === itemsArray.length) {
     document.querySelector('#progressPanel').remove();
     document.querySelector('#comparePanel').removeEventListener('click', onComparePanelClick);
+    document.querySelector('#comparePanel').removeEventListener('keydown', onComparePanelEnter);
     document.querySelector('#comparePanel').remove();
     renderResult();
   }
@@ -206,6 +208,7 @@ var onUndoButtonClick = (evt) => {
   if (document.querySelector('#progressPanel')) {
     document.querySelector('#progressPanel').remove();
     document.querySelector('#comparePanel').removeEventListener('click', onComparePanelClick);
+    document.querySelector('#comparePanel').removeEventListener('keydown', onComparePanelEnter);
     document.querySelector('#comparePanel').remove();
   } else if (document.querySelector('#resultPanel')) {
     document.querySelector('#resultPanel').remove();
@@ -229,6 +232,16 @@ var onComparePanelClick = (evt) => {
   if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
     itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
     renderPairs();
+  }
+};
+
+var onComparePanelEnter = (evt) => {
+  if (evt.keyCode === 13) {
+    evt.preventDefault();
+    if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
+      itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
+      renderPairs();
+    }
   }
 };
 
