@@ -1,7 +1,8 @@
 {
+  "license": "MIT",
   "private": true,
   "devDependencies": {
-    "eslint": "^6.0.0",
-    "semistandard": "^13.0.1"
+    "eslint": "^7.12.1",
+    "semistandard": "^14.2.3"
   }
 }
