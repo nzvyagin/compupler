@@ -3,6 +3,10 @@
   "private": true,
   "devDependencies": {
     "eslint": "^7.31.0",
-    "semistandard": "^16.0.1"
+    "semistandard": "^16.0.1",
+    "simple-autoreload-server": "^0.2.15"
+  },
+  "scripts": {
+    "start": "autoreload-server"
   }
 }
