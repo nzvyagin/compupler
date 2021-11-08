@@ -120,7 +120,7 @@ const renderResult = () => {
   <ol id="resultPanel" class="mb-5">${result.reduce((acc, item) => {
     acc += `<li>${item.name}</li>`;
     return acc;
-  }, ``)}</ol>`;
+  }, '')}</ol>`;
   document.querySelector('#undoPanel').insertAdjacentHTML('beforebegin', renderResultTemplate);
 };
 
