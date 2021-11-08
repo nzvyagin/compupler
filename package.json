@@ -2,11 +2,10 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.2.0",
-    "semistandard": "^16.0.1",
-    "simple-autoreload-server": "^0.2.15"
+    "eslint": "8.2.0"
   },
   "scripts": {
-    "start": "autoreload-server"
-  }
+    "eslint": "eslint --ext .js ."
+  },
+  "dependencies": {}
 }
