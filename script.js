@@ -85,8 +85,8 @@ const renderUndoPanel = () => {
 };
 
 var renderPairs = () => {
-  var firstElement = document.querySelector('#firstElement');
-  var secondElement = document.querySelector('#secondElement');
+  let firstElement = document.querySelector('#firstElement');
+  let secondElement = document.querySelector('#secondElement');
   if (secondElementPosition < itemsArray.length) {
     document.querySelector('#currentСombination').innerHTML = combinationsCounter + 1;
     firstElement.innerHTML = itemsArray[firstElementPosition].name;
@@ -125,15 +125,15 @@ const renderResult = () => {
 };
 
 var fact = (x) => {
-  var z = x;
-  for (var i = x - 1; i >= 2; i--) {
+  let z = x;
+  for (let i = x - 1; i >= 2; i--) {
     z = z * i;
   }
   return z;
 };
 
 var refreshRunButton = () => {
-  var runPanel = document.querySelector('#runButton');
+  let runPanel = document.querySelector('#runButton');
   if (itemsArray.length === 0) {
     runPanel.style.display = 'none';
   } else {
@@ -149,7 +149,7 @@ var refreshRunButton = () => {
 
 var onAddItemButtonClick = (evt) => {
   evt.preventDefault();
-  var inputField = document.querySelector('#inputField');
+  let inputField = document.querySelector('#inputField');
   if (inputField.value) {
     const inputData = String(inputField.value).split(',');
     const trimmedInputData = Array.from(inputData, elem => elem.trim());
@@ -167,7 +167,7 @@ var onAddItemButtonClick = (evt) => {
 var onEnter = (evt) => {
   if (evt.keyCode === 13) {
     evt.preventDefault();
-    var inputField = document.querySelector('#inputField');
+    let inputField = document.querySelector('#inputField');
     if (inputField.value) {
       const inputData = String(inputField.value).split(',');
       const trimmedInputData = Array.from(inputData, elem => elem.trim());
@@ -186,7 +186,7 @@ var onEnter = (evt) => {
 var onClickDelete = (evt) => {
   if (/deleteItem/.test(evt.target.id)) {
     evt.preventDefault();
-    var itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
+    let itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
     itemsArray.splice(itemToDelete, 1);
     document.querySelector('#itemsList').innerHTML = '';
     itemsArray.forEach((elem, idx) => {
