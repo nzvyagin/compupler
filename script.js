@@ -1,9 +1,9 @@
-var itemsArray = [];
-var firstElementPosition = 0;
-var secondElementPosition = 1;
-var combinationsCounter = 0;
+const itemsArray = [];
+let firstElementPosition = 0;
+let secondElementPosition = 1;
+let combinationsCounter = 0;
 
-var onClickResetButton = (evt) => {
+const onClickResetButton = (evt) => {
   evt.preventDefault();
   document.location.reload(true);
 };
@@ -20,14 +20,14 @@ const addItem = (content, id) => {
   refreshRunButton();
 };
 
-var refreshResetButton = () => {
+const refreshResetButton = () => {
   if (document.querySelector('#resetButton').style.display === 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
   }
   document.querySelector('#itemsCount').innerHTML = '(' + itemsArray.length + ')';
 };
 
-var countCombinations = () => {
+const countCombinations = () => {
   if (itemsArray.length === 1) {
     return 0;
   } else if (itemsArray.length === 2) {
@@ -37,7 +37,7 @@ var countCombinations = () => {
   }
 };
 
-var onRunButton = () => {
+const onRunButton = () => {
   document.querySelector('#addItemButton').removeEventListener('click', onAddItemButtonClick);
   document.querySelector('#onboardingPanel').remove();
   document.querySelector('#inputPanel').remove();
@@ -50,7 +50,7 @@ var onRunButton = () => {
   renderUndoPanel();
 };
 
-var renderProgressPanel = () => {
+const renderProgressPanel = () => {
   const progressPanelTemplate = `
     <div id="progressPanel" class="text-center mb-3">
       <span id="currentСombination"></span>
@@ -84,7 +84,7 @@ const renderUndoPanel = () => {
   document.querySelector('#undoButton').addEventListener('click', onUndoButtonClick);
 };
 
-var renderPairs = () => {
+const renderPairs = () => {
   let firstElement = document.querySelector('#firstElement');
   let secondElement = document.querySelector('#secondElement');
   if (secondElementPosition < itemsArray.length) {
@@ -110,7 +110,7 @@ var renderPairs = () => {
   }
 };
 
-var compareScores = (itemOne, itemTwo) => {
+const compareScores = (itemOne, itemTwo) => {
   return itemTwo.score - itemOne.score;
 };
 
@@ -124,7 +124,7 @@ const renderResult = () => {
   document.querySelector('#undoPanel').insertAdjacentHTML('beforebegin', renderResultTemplate);
 };
 
-var fact = (x) => {
+const fact = (x) => {
   let z = x;
   for (let i = x - 1; i >= 2; i--) {
     z = z * i;
@@ -132,7 +132,7 @@ var fact = (x) => {
   return z;
 };
 
-var refreshRunButton = () => {
+const refreshRunButton = () => {
   let runPanel = document.querySelector('#runButton');
   if (itemsArray.length === 0) {
     runPanel.style.display = 'none';
@@ -147,7 +147,7 @@ var refreshRunButton = () => {
   document.querySelector('#combinationsCount').innerHTML = countCombinations();
 };
 
-var onAddItemButtonClick = (evt) => {
+const onAddItemButtonClick = (evt) => {
   evt.preventDefault();
   let inputField = document.querySelector('#inputField');
   if (inputField.value) {
@@ -164,7 +164,7 @@ var onAddItemButtonClick = (evt) => {
   }
 };
 
-var onEnter = (evt) => {
+const onEnter = (evt) => {
   if (evt.keyCode === 13) {
     evt.preventDefault();
     let inputField = document.querySelector('#inputField');
@@ -183,7 +183,7 @@ var onEnter = (evt) => {
   }
 };
 
-var onClickDelete = (evt) => {
+const onClickDelete = (evt) => {
   if (/deleteItem/.test(evt.target.id)) {
     evt.preventDefault();
     let itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
@@ -201,7 +201,7 @@ var onClickDelete = (evt) => {
   }
 };
 
-var onUndoButtonClick = (evt) => {
+const onUndoButtonClick = (evt) => {
   document.querySelector('#undoButton').removeEventListener('click', onUndoButtonClick);
   document.querySelector('#undoButton').remove();
   evt.preventDefault();
@@ -227,7 +227,7 @@ var onUndoButtonClick = (evt) => {
   refreshResetButton();
 };
 
-var onComparePanelClick = (evt) => {
+const onComparePanelClick = (evt) => {
   evt.preventDefault();
   if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
     itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
@@ -235,7 +235,7 @@ var onComparePanelClick = (evt) => {
   }
 };
 
-var onComparePanelEnter = (evt) => {
+const onComparePanelEnter = (evt) => {
   if (evt.keyCode === 13) {
     evt.preventDefault();
     if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
@@ -261,7 +261,7 @@ const renderInputPanel = () => {
   document.querySelector('#inputField').addEventListener('focus', onInputPanelFocus);
 };
 
-var onInputPanelFocus = () => {
+const onInputPanelFocus = () => {
   document.querySelector('#firstHint').classList.add('fade');
   document.querySelector('#secondHint').classList.add('fade');
 };
@@ -301,7 +301,7 @@ const renderItemsPanel = () => {
   document.querySelector('#itemsList').addEventListener('click', onClickDelete);
 };
 
-var renderRunPanel = () => {
+const renderRunPanel = () => {
   const runPanel = `
     <div id="runPanel" class="row justify-content-center mb-5">
       <button id="runButton" class="btn btn-outline-success">Сравнить сочетания (<span id="combinationsCount"></span>)</button>
