@@ -24,7 +24,7 @@ const refreshResetButton = () => {
   if (document.querySelector('#resetButton').style.display === 'none') {
     document.querySelector('#resetButton').style.display = 'inline';
   }
-  document.querySelector('#itemsCount').innerHTML = '(' + itemsArray.length + ')';
+  document.querySelector('#itemsCount').innerText = '(' + itemsArray.length + ')';
 };
 
 const countCombinations = () => {
@@ -88,17 +88,17 @@ const renderPairs = () => {
   let firstElement = document.querySelector('#firstElement');
   let secondElement = document.querySelector('#secondElement');
   if (secondElementPosition < itemsArray.length) {
-    document.querySelector('#currentСombination').innerHTML = combinationsCounter + 1;
-    firstElement.innerHTML = itemsArray[firstElementPosition].name;
-    secondElement.innerHTML = itemsArray[secondElementPosition].name;
+    document.querySelector('#currentСombination').innerText = combinationsCounter + 1;
+    firstElement.innerText = itemsArray[firstElementPosition].name;
+    secondElement.innerText = itemsArray[secondElementPosition].name;
     secondElementPosition = secondElementPosition + 1;
     combinationsCounter += 1;
   } else if (firstElementPosition < itemsArray.length - 2) {
-    document.querySelector('#currentСombination').innerHTML = combinationsCounter + 1;
+    document.querySelector('#currentСombination').innerText = combinationsCounter + 1;
     firstElementPosition = firstElementPosition + 1;
     secondElementPosition = firstElementPosition + 1;
-    firstElement.innerHTML = itemsArray[firstElementPosition].name;
-    secondElement.innerHTML = itemsArray[secondElementPosition].name;
+    firstElement.innerText = itemsArray[firstElementPosition].name;
+    secondElement.innerText = itemsArray[secondElementPosition].name;
     secondElementPosition = secondElementPosition + 1;
     combinationsCounter += 1;
   } else if (firstElementPosition === itemsArray.length - 2 && secondElementPosition === itemsArray.length) {
@@ -144,7 +144,7 @@ const refreshRunButton = () => {
   } else if (countCombinations() > 0) {
     runPanel.disabled = false;
   }
-  document.querySelector('#combinationsCount').innerHTML = countCombinations();
+  document.querySelector('#combinationsCount').innerText = countCombinations();
 };
 
 const onAddItemButtonClick = (evt) => {
@@ -186,9 +186,9 @@ const onEnter = (evt) => {
 const onClickDelete = (evt) => {
   if (/deleteItem/.test(evt.target.id)) {
     evt.preventDefault();
-    let itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerHTML));
+    let itemToDelete = itemsArray.indexOf(itemsArray.find(itm => itm.name === evt.target.previousElementSibling.innerText));
     itemsArray.splice(itemToDelete, 1);
-    document.querySelector('#itemsList').innerHTML = '';
+    document.querySelector('#itemsList').innerText = '';
     itemsArray.forEach((elem, idx) => {
       elem.score = 0;
       addItem(elem.name, idx);
@@ -230,7 +230,7 @@ const onUndoButtonClick = (evt) => {
 const onComparePanelClick = (evt) => {
   evt.preventDefault();
   if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
-    itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
+    itemsArray.find(itm => itm.name === evt.target.innerText).score += 1;
     renderPairs();
   }
 };
@@ -239,7 +239,7 @@ const onComparePanelEnter = (evt) => {
   if (evt.keyCode === 13) {
     evt.preventDefault();
     if (evt.target.id === 'firstElement' || evt.target.id === 'secondElement') {
-      itemsArray.find(itm => itm.name === evt.target.innerHTML).score += 1;
+      itemsArray.find(itm => itm.name === evt.target.innerText).score += 1;
       renderPairs();
     }
   }
