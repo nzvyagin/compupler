@@ -3,9 +3,17 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 13
+        "requireConfigFile": false,
+        "ecmaVersion": 13,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+       }
     },
     "rules": {
         "indent": [
@@ -17,7 +25,7 @@
             "unix"
         ],
         "no-var": [
-          "error"
+            "error"
         ],
         "quotes": [
             "error",
@@ -27,5 +35,10 @@
             "error",
             "always"
         ]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
