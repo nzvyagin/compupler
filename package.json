@@ -15,9 +15,9 @@
     "webpack-dev-server": "^4.7.3"
   },
   "scripts": {
-    "build:dev": "webpack --mode=development",
+    "build": "webpack",
     "build:prod": "webpack --mode=production",
-    "dev": "webpack-dev-server --mode=development",
+    "dev": "webpack-dev-server",
     "eslint": "eslint --ignore-pattern dist/* --ext .js ."
   },
   "dependencies": {
