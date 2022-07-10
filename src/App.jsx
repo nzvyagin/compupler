@@ -1,6 +1,6 @@
-import React from 'react';
+import { Input } from './Input';
 
-function App() {
+export const App = () => {
   return (
     <>
       <a href="https://github.com/nzvyagin/compupler">
@@ -8,9 +8,8 @@ function App() {
       </a>
       <main className="container pt-5">
         <h1 className="text-center w-100 mt-5 mb-5">Compupler</h1>
+        <Input />
       </main>
     </>
   );
-}
-
-export default App;
+};

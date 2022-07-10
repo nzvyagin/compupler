@@ -246,14 +246,14 @@ const onComparePanelEnter = (evt) => {
 };
 
 const renderInputPanel = () => {
-  const inputPanel = `
-  <div id="inputPanel" class="mb-5">
-    <div id="inputRow" class="d-flex flex-row">
-      <input type="text" id="inputField" class="form-control mr-1">
-      <button id="addItemButton" class="btn btn-outline-primary">Добавить</button>
-    </div>
-  </div>
-  `;
+  // const inputPanel = `
+  // <div id="inputPanel" class="mb-5">
+  //   <div id="inputRow" class="d-flex flex-row">
+  //     <input type="text" id="inputField" class="form-control mr-1">
+  //     <button id="addItemButton" class="btn btn-outline-primary">Добавить</button>
+  //   </div>
+  // </div>
+  // `;
   document.querySelector('main').insertAdjacentHTML('beforeend', inputPanel);
   document.querySelector('#addItemButton').addEventListener('click', onAddItemButtonClick);
   document.querySelector('#inputField').addEventListener('paste', (evt) => pasteFromBuffer(evt));
