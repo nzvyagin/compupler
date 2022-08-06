@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { Entries } from './Entries';
 import { Input } from './Input';
 import { Run } from './Run';
+import { Clear } from './Clear';
 import { combinePairwise } from './utils';
 
 export const App = () => {
@@ -17,6 +18,7 @@ export const App = () => {
         <h1 className="text-center w-100 mt-5 mb-5">Compupler</h1>
         <Input entries={entries} setEntries={setEntries} />
         <Run pairsCount={getPairs().length} />
+        <Clear entries={entries} setEntries={setEntries} />
         <Entries entries={entries} setEntries={setEntries} />
       </main>
     </>
