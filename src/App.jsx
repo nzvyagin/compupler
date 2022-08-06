@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Entries } from './Entries';
 import { Input } from './Input';
+import { Run } from './Run';
+import { combinePairwise } from './utils';
 
 export const App = () => {
   const [entries, setEntries] = useState([]);
+  const getPairs = useCallback(() => combinePairwise([...entries]), [entries]);
 
   return (
     <>
@@ -13,6 +16,7 @@ export const App = () => {
       <main className="container pt-5">
         <h1 className="text-center w-100 mt-5 mb-5">Compupler</h1>
         <Input entries={entries} setEntries={setEntries} />
+        <Run pairsCount={getPairs().length} />
         <Entries entries={entries} setEntries={setEntries} />
       </main>
     </>
