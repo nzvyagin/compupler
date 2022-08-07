@@ -1,22 +1,14 @@
 import { useState } from 'react';
+import { createEntry } from './utils';
 
 export const Input = ({entries, setEntries}) => {
   const [text, setText] = useState('');
 
-  const createEntry = (text) => {
-    return {
-      text: text,
-      id: 'id_' + text,
-      rating: null
-    };
-  };
-
   const handleTextChange = (e) => setText(e.target.value);
 
   const handleEntryAdd = () => {
-    const currentValue = text;
+    setEntries(entries = [...entries, createEntry(text)]);
     setText('');
-    setEntries(entries = [...entries, createEntry(currentValue)]);
   };
 
   return (
