@@ -1,4 +1,4 @@
-import { Entry } from './Entry';
+import { Entry } from '../components';
 
 export const Entries = ({entries, setEntries}) => {
   return (

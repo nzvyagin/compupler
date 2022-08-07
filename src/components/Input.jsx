@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { createEntry } from './utils';
+import { createEntry } from '../utils';
 
 export const Input = ({entries, setEntries}) => {
   const [text, setText] = useState('');

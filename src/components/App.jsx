@@ -1,9 +1,6 @@
 import { useCallback, useState } from 'react';
-import { Entries } from './Entries';
-import { Input } from './Input';
-import { Run } from './Run';
-import { Clear } from './Clear';
-import { combinePairwise } from './utils';
+import { Entries, Input, Run, Clear } from '../components';
+import { combinePairwise } from '../utils';
 
 export const App = () => {
   const [entries, setEntries] = useState([]);
