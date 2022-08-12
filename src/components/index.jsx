@@ -4,3 +4,5 @@ export { Entries } from './Entries';
 export { Entry } from './Entry';
 export { Input } from './Input';
 export { Run } from './Run';
+export { Undo } from './Undo';
+export { Compare } from './Compare';
