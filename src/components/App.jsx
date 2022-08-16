@@ -7,8 +7,6 @@ export const App = () => {
   const [resultList, setResultList] = useState(null);
   const getPairs = useCallback(() => combinePairwise([...entries]), [entries]);
 
-  console.log('resultList', resultList);
-
   return (
     <>
       <a href="https://github.com/nzvyagin/compupler">
