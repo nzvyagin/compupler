@@ -6,3 +6,4 @@ export { Input } from './Input';
 export { Run } from './Run';
 export { Undo } from './Undo';
 export { Compare } from './Compare';
+export { Pair } from './Pair';

@@ -1,6 +1,8 @@
-export const Run = ({getPairs, setResultList}) => {
+export const Run = ({entries, getPairs, setResultList}) => {
   const pairsCount = getPairs().length;
-  const handleRunCompare = () => setResultList(getPairs());
+  const handleRunCompare = () => {
+    setResultList([...entries]);
+  };
 
   if(!pairsCount) return null;
 

@@ -7,7 +7,7 @@ export const App = () => {
   const [resultList, setResultList] = useState(null);
   const getPairs = useCallback(() => combinePairwise([...entries]), [entries]);
 
-  console.log(resultList);
+  console.log('resultList', resultList);
 
   return (
     <>
@@ -25,7 +25,7 @@ export const App = () => {
         {!resultList && (
           <>
             <Input entries={entries} setEntries={setEntries} />
-            <Run getPairs={getPairs} setResultList={setResultList} />
+            <Run entries={entries} getPairs={getPairs} setResultList={setResultList} />
             <Clear entries={entries} setEntries={setEntries} />
             <Entries entries={entries} setEntries={setEntries} />
           </>
