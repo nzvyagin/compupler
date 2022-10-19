@@ -14,14 +14,14 @@ export const Pair = ({currentPair, currentIndex, setCurrentIndex, setResultList,
   };
 
   return (
-    <div id="comparePanel" className="mb-5">
-      <div onClick={handleCardChoice} id={currentPair[0].id} className="py-3 border bg-light text-center" tabIndex={0}>
+    <div className="d-flex flex-column mb-5">
+      <button onClick={handleCardChoice} id={currentPair[0].id} className="py-3 border bg-light text-center overflow-hidden text-nowrap">
         {currentPair[0].text}
-      </div>
+      </button>
       <div className="py-1 text-center">или</div>
-      <div onClick={handleCardChoice} id={currentPair[1].id} className="py-3 border bg-light text-center" tabIndex={0}>
+      <button onClick={handleCardChoice} id={currentPair[1].id} className="py-3 border bg-light text-center overflow-hidden text-nowrap">
         {currentPair[1].text}
-      </div>
+      </button>
     </div>
   );
 };

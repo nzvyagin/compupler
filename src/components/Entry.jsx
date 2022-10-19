@@ -3,7 +3,7 @@ export const Entry = ({id, text, setEntries, entries}) => {
 
   return (
     <div id={id} onClick={handleEntryDelete} className="mb-2 d-flex align-items-center bg-light">
-      <div className="flex-grow-1 mx-1">{text}</div>
+      <div className="flex-grow-1 mx-1 overflow-hidden text-nowrap">{text}</div>
       <button className="btn btn-danger btn-sm">Удалить</button>
     </div>
   );
