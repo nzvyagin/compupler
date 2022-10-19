@@ -1,11 +1,19 @@
 import { nanoid } from 'nanoid/non-secure';
 
-export const createEntry = (text) => {
-  return {
-    text: text,
-    id: nanoid(6),
-    rating: null
-  };
+export const createEntries = (data) => {
+  const sourceList = data.includes(',')
+    ? data.split(',')
+    : [data];
+
+  const entriesList = sourceList.map(item => {
+    return {
+      text: item.trim(),
+      id: nanoid(6),
+      rating: null
+    };
+  });
+
+  return entriesList;
 };
 
 export const combinePairwise = (arr) => {

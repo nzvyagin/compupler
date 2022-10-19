@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { createEntry } from '../utils';
+import { createEntries } from '../utils';
 
 export const Input = ({entries, setEntries}) => {
   const [text, setText] = useState('');
 
   const addEntry = () => {
-    setEntries(entries = [...entries, createEntry(text)]);
+    setEntries(entries = [...entries, ...createEntries(text)]);
     setText('');
   };
 
