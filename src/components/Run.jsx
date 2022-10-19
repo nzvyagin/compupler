@@ -4,11 +4,11 @@ export const Run = ({entries, getPairs, setResultList}) => {
     setResultList([...entries]);
   };
 
-  if(!pairsCount) return null;
+  if(!entries.length) return null;
 
   return (
     <div className="d-flex flex-row justify-content-center">
-      <button onClick={handleRunCompare} className="btn btn-outline-success mb-5">Сравнить сочетания ({pairsCount})</button>
+      <button onClick={handleRunCompare} className="btn btn-outline-success mb-5" disabled={!pairsCount}>Сравнить сочетания ({pairsCount})</button>
     </div>
   );
 };
