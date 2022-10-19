@@ -1,6 +1,8 @@
 import { Entry } from '../components';
 
 export const Entries = ({entries, setEntries}) => {
+  if(!entries.length) return null;
+
   return (
     <div className="text-right">
       <div className="text-left">
