@@ -14,9 +14,9 @@ export const Input = ({entries, setEntries}) => {
 
     const pastedData = e.clipboardData.getData('text');
 
-    if(/[\r\n]+/g.test(pastedData)) {
-      setText(pastedData.replace(/(?<=.)[\r\n]+(?![\r\n]+)(?=.)/g, ', '));
-    }
+    /[\r\n]+/g.test(pastedData)
+      ? setText(pastedData.replace(/(?<=.)[\r\n]+(?![\r\n]+)(?=.)/g, ', '))
+      : setText(pastedData);
   };
 
   const handleChange = (e) => setText(e.target.value);
