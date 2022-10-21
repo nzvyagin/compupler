@@ -5,7 +5,7 @@ export const Input = ({entries, setEntries}) => {
   const [text, setText] = useState('');
 
   const addEntry = () => {
-    setEntries(entries = [...entries, ...createEntries(text)]);
+    text && setEntries(entries = [...entries, ...createEntries(text)]);
     setText('');
   };
 
