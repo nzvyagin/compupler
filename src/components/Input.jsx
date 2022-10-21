@@ -9,6 +9,16 @@ export const Input = ({entries, setEntries}) => {
     setText('');
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+
+    const pastedData = e.clipboardData.getData('text');
+
+    if(/[\r\n]+/g.test(pastedData)) {
+      setText(pastedData.replace(/(?<=.)[\r\n]+(?![\r\n]+)(?=.)/g, ', '));
+    }
+  };
+
   const handleChange = (e) => setText(e.target.value);
 
   const handleKeyUp = (e) => e.code === 'Enter' && addEntry();
@@ -18,7 +28,7 @@ export const Input = ({entries, setEntries}) => {
   return (
     <div className="mb-5">
       <div className="d-flex flex-row">
-        <input type="text" value={text} onChange={handleChange} onKeyUp={handleKeyUp} className="form-control mr-1" />
+        <input type="text" value={text} onChange={handleChange} onKeyUp={handleKeyUp} onPaste={handlePaste} className="form-control mr-1" />
         <button onClick={handleClick} className="btn btn-outline-primary">Добавить</button>
       </div>
     </div>
