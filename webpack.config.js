@@ -1,6 +1,7 @@
 /* eslint-env node */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -15,6 +16,11 @@ module.exports = {
     new CleanWebpackPlugin({
       protectWebpackAssets: false,
       cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{
+        context: './public', from:'*.svg'
+      }],
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
