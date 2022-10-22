@@ -7,6 +7,7 @@
     "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
     "babel-loader": "8.2.3",
+    "clean-webpack-plugin": "4.0.0",
     "eslint": "8.2.0",
     "eslint-plugin-react": "7.28.0",
     "gh-pages": "4.0.0",
@@ -18,10 +19,10 @@
   "scripts": {
     "build": "webpack",
     "build:prod": "webpack --mode=production",
-    "deploy" : "gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "dev": "webpack-dev-server",
     "eslint": "eslint --ignore-pattern dist/* --ext .js .",
-    "predeploy" : "npm run build:prod"
+    "predeploy": "npm run build:prod"
   },
   "dependencies": {
     "nanoid": "4.0.0",
