@@ -1,11 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Entries, Input, Run, Clear, Undo, Compare } from '../components';
 import { combinePairwise } from '../utils';
 
 export const App = () => {
   const [entries, setEntries] = useState([]);
+  const [pairs, setPairs] = useState([]);
   const [resultList, setResultList] = useState(null);
-  const getPairs = useCallback(() => combinePairwise([...entries]), [entries]);
+
+  useEffect(() => {
+    setPairs(combinePairwise(entries));
+  }, [entries]);
 
   return (
     <>
@@ -13,14 +17,14 @@ export const App = () => {
         <h1 className="text-center w-100 mt-5 mb-5">Compupler</h1>
         {resultList && (
           <>
-            <Compare getPairs={getPairs} resultList={resultList} setResultList={setResultList} />
+            <Compare pairs={pairs} resultList={resultList} setResultList={setResultList} />
             <Undo setResultList={setResultList} />
           </>
         )}
         {!resultList && (
           <>
             <Input entries={entries} setEntries={setEntries} />
-            <Run entries={entries} getPairs={getPairs} setResultList={setResultList} />
+            <Run entries={entries} pairs={pairs} setResultList={setResultList} />
             <Clear entries={entries} setEntries={setEntries} />
             <Entries entries={entries} setEntries={setEntries} />
           </>

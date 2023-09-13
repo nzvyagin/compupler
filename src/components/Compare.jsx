@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Pair, Result, Counter } from '../components';
 
-export const Compare = ({getPairs, resultList, setResultList}) => {
-  const pairs = getPairs();
+export const Compare = ({pairs, resultList, setResultList}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if(currentIndex === pairs.length) {

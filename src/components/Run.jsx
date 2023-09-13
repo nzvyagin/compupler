@@ -1,5 +1,5 @@
-export const Run = ({entries, getPairs, setResultList}) => {
-  const pairsCount = getPairs().length;
+export const Run = ({entries, pairs, setResultList}) => {
+  const pairsCount = pairs.length;
   const handleRunCompare = () => {
     setResultList([...entries]);
   };
