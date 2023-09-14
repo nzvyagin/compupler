@@ -24,4 +24,4 @@
 
 * Инструмент создавался без оглядки на уже существующие программные решения, все возможные совпадения - случайны.
 
-* В качестве алгоритма попарного сравнения использовано [решение от Alexis King](https://codereview.stackexchange.com/questions/75658/pairwise-combinations-of-an-array-in-javascript)
+* В качестве алгоритма попарного сравнения использовано [решение от Alexis King](https://codereview.stackexchange.com/questions/75658/pairwise-combinations-of-an-array-in-javascript#answer-75663)
