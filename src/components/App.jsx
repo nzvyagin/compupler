@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Entries, Input, Run, Clear, Undo, Compare } from '../components';
+import { Entries, Input, Run, Clear, Undo, Compare, OnboardingPanel } from '../components';
 import { combinePairwise } from '../utils';
 
 export const App = () => {
@@ -23,6 +23,7 @@ export const App = () => {
         )}
         {!resultList && (
           <>
+            <OnboardingPanel />
             <Input entries={entries} setEntries={setEntries} />
             <Run entries={entries} pairs={pairs} setResultList={setResultList} />
             <Clear entries={entries} setEntries={setEntries} />

@@ -9,3 +9,4 @@ export { Compare } from './Compare';
 export { Pair } from './Pair';
 export { Result } from './Result';
 export { Counter } from './Counter';
+export { OnboardingPanel } from './OnboardingPanel';
