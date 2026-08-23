@@ -1,36 +1,35 @@
 import { useState } from 'react';
-import { createEntries } from '../utils';
+import { createEntries } from '../utils.js';
 
-export const Input = ({entries, setEntries,}) => {
+export const Input = ({ setEntries }) => {
   const [text, setText] = useState('');
 
-  const addEntry = () => {
-    text && setEntries(entries = [...entries, ...createEntries(text)]);
+  const addEntries = () => {
+    const newEntries = createEntries(text);
+    if (!newEntries.length) return;
+    setEntries((entries) => [...entries, ...newEntries]);
     setText('');
   };
 
-  const handlePaste = (e) => {
-    e.preventDefault();
-
-    const pastedData = e.clipboardData.getData('text');
-
-    /[\r\n]+/g.test(pastedData)
-      ? setText(pastedData.replace(/(?<=.)[\r\n]+(?![\r\n]+)(?=.)/g, ', '))
-      : setText(pastedData);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addEntries();
   };
 
-  const handleChange = (e) => setText(e.target.value);
-
-  const handleKeyUp = (e) => e.code === 'Enter' && addEntry();
-
-  const handleClick = () => addEntry();
+  const handlePaste = (event) => {
+    const pastedText = event.clipboardData.getData('text');
+    if (!/\r|\n/.test(pastedText)) return;
+    event.preventDefault();
+    setText(pastedText.split(/\r?\n/).filter(Boolean).join(', '));
+  };
 
   return (
-    <div className="mb-5">
-      <div className="d-flex flex-row">
-        <input type="text" value={text} onChange={handleChange} onKeyUp={handleKeyUp} onPaste={handlePaste} className="form-control mr-1" />
-        <button onClick={handleClick} className="btn btn-outline-primary">Добавить</button>
-      </div>
-    </div>
+    <form className="input-group mb-4" onSubmit={handleSubmit}>
+      <label className="visually-hidden" htmlFor="entry-input">Варианты для сравнения</label>
+      <input id="entry-input" className="form-control" type="text" value={text}
+        placeholder="Введите один или несколько вариантов" autoComplete="off"
+        onChange={(event) => setText(event.target.value)} onPaste={handlePaste} />
+      <button className="btn btn-outline-primary" type="submit" disabled={!text.trim()}>Добавить</button>
+    </form>
   );
 };

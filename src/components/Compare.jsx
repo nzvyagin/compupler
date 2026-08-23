@@ -1,19 +1,17 @@
 import { useState } from 'react';
-import { Pair, Result, Counter } from '../components';
+import { Counter, Pair, Result, Undo } from './index.js';
 
-export const Compare = ({pairs, resultList, setResultList}) => {
+export const Compare = ({ pairs, resultList, setResultList }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const reset = () => setResultList(null);
 
-  if(currentIndex === pairs.length) {
-    return <Result resultList={resultList} />;
-  }
-
-  const currentPair = pairs[currentIndex];
+  if (currentIndex === pairs.length) return <Result resultList={resultList} onReset={reset} />;
 
   return (
     <>
-      <Counter currentIndex={currentIndex} pairs={pairs} />
-      <Pair currentPair={currentPair} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} setResultList={setResultList} resultList={resultList} />
+      <Counter currentIndex={currentIndex} pairsCount={pairs.length} />
+      <Pair currentPair={pairs[currentIndex]} setCurrentIndex={setCurrentIndex} setResultList={setResultList} />
+      <Undo onReset={reset} />
     </>
   );
 };

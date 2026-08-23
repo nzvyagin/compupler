@@ -1,7 +1,3 @@
-export const Undo = ({setResultList}) => {
-  return (
-    <div className="d-flex flex-row justify-content-center mb-3">
-      <button onClick={() => setResultList(null)} className="btn btn-outline-danger">Начать заново</button>
-    </div>
-  );
+export const Undo = ({ onReset }) => {
+  return <div className="d-flex justify-content-center"><button className="btn btn-outline-danger" type="button" onClick={onReset}>Начать заново</button></div>;
 };

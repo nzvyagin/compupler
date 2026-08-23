@@ -1,0 +1,12 @@
+body {
+  min-width: 320px;
+  background-color: #f8f9fa;
+}
+
+.app-content {
+  max-width: 720px;
+}
+
+.progress {
+  height: 0.4rem;
+}

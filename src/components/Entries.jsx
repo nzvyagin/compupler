@@ -1,13 +1,6 @@
-import { Entry } from '../components';
+import { Entry } from './Entry.jsx';
 
-export const Entries = ({entries, setEntries}) => {
-  if(!entries.length) return null;
-
-  return (
-    <div className="text-right">
-      <div className="text-left">
-        {entries.map((entry) => <Entry key={entry.id} id={entry.id} text={entry.text} setEntries={setEntries} entries={entries} />)}
-      </div>
-    </div>
-  );
+export const Entries = ({ entries, setEntries }) => {
+  if (!entries.length) return null;
+  return <ul className="list-group">{entries.map((entry) => <Entry key={entry.id} entry={entry} setEntries={setEntries} />)}</ul>;
 };

@@ -1,35 +1,33 @@
-import { useEffect, useState } from 'react';
-import { Entries, Input, Run, Clear, Undo, Compare, OnboardingPanel } from '../components';
-import { combinePairwise } from '../utils';
+import { useMemo, useState } from 'react';
+import forkMeRibbon from '../assets/forkme_right_orange_ff7600.svg';
+import { combinePairwise } from '../utils.js';
+import { Clear, Compare, Entries, Input, OnboardingPanel, Run } from './index.js';
 
 export const App = () => {
   const [entries, setEntries] = useState([]);
-  const [pairs, setPairs] = useState([]);
   const [resultList, setResultList] = useState(null);
-
-  useEffect(() => {
-    setPairs(combinePairwise(entries));
-  }, [entries]);
+  const pairs = useMemo(() => combinePairwise(entries), [entries]);
 
   return (
     <>
-      <main className="container pt-5">
-        <h1 className="text-center w-100 mt-5 mb-5">Compupler</h1>
-        {resultList && (
-          <>
+      <a href="https://github.com/nzvyagin/compupler">
+        <img className="position-absolute top-0 end-0" src={forkMeRibbon} alt="Fork me on GitHub" />
+      </a>
+      <main className="container py-5">
+        <div className="mx-auto app-content">
+          <h1 className="text-center mb-5">Compupler</h1>
+          {resultList ? (
             <Compare pairs={pairs} resultList={resultList} setResultList={setResultList} />
-            <Undo setResultList={setResultList} />
-          </>
-        )}
-        {!resultList && (
-          <>
-            <OnboardingPanel />
-            <Input entries={entries} setEntries={setEntries} />
-            <Run entries={entries} pairs={pairs} setResultList={setResultList} />
-            <Clear entries={entries} setEntries={setEntries} />
-            <Entries entries={entries} setEntries={setEntries} />
-          </>
-        )}
+          ) : (
+            <>
+              <OnboardingPanel />
+              <Input setEntries={setEntries} />
+              <Run entries={entries} pairs={pairs} setResultList={setResultList} />
+              <Clear entries={entries} setEntries={setEntries} />
+              <Entries entries={entries} setEntries={setEntries} />
+            </>
+          )}
+        </div>
       </main>
     </>
   );

@@ -1,9 +1,10 @@
-export const Clear = ({entries, setEntries}) => {
-  if(!entries.length) return null;
-
+export const Clear = ({ entries, setEntries }) => {
+  if (!entries.length) return null;
   return (
-    <div className="d-flex flex-row justify-content-end">
-      <button onClick={() => setEntries([])} className="btn btn-outline-danger btn-sm mb-2">Очистить всё ({entries.length})</button>
+    <div className="d-flex justify-content-end mb-2">
+      <button className="btn btn-outline-danger btn-sm" type="button" onClick={() => setEntries([])}>
+        Очистить всё ({entries.length})
+      </button>
     </div>
   );
 };
